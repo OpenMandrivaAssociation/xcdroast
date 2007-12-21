@@ -38,6 +38,7 @@ Patch40:	xcdroast-0.98alpha15.spell.patch
 Patch41:	xcdroast-linux-new_kernel.patch
 License:	LGPLv2+
 Group:		Archiving/Cd burning
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: 	cdrkit
 Requires:	cdrkit-genisoimage
 Requires:	cdrkit-icedax
