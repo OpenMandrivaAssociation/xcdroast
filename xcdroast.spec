@@ -45,7 +45,7 @@ Requires:	cdrkit-icedax
 BuildRequires:	gtk2-devel 
 BuildRequires:	libgdk_pixbuf2.0-devel 
 BuildRequires:	pcre-devel 
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 BuildRequires:	bison
 
 %description
