@@ -13,6 +13,7 @@ Source:		http://xcdroast.sourceforge.net/RPMS/%{alpha}/src/%{name}-%{version}%{a
 Patch1:		xcdroast-0.98alpha15-linebuffer.patch
 Patch2:		xcdroast-0.98alpha15-nowarn.patch
 Patch3:		xcdroast-0.98alpha15-scan.patch
+Patch4:		xcdroast-0.98alpha15-fix-str-fmt.patch
 
 Patch11:	xcdroast-0.98alpha15-01_upstream_configure.patch
 Patch12:	xcdroast-0.98alpha15-02_upstream_gtk2locale.patch
@@ -60,6 +61,7 @@ copying of CDs without hard disk buffering, and a logfile option.
 %patch1 -p1 -b .linebuffer
 %patch2 -p1 -b .nowarn
 %patch3 -p1 -b .scan
+%patch4 -p0 -b .str
 
 %patch11 -p1 -b .p11
 %patch12 -p1 -b .p12
@@ -85,6 +87,7 @@ copying of CDs without hard disk buffering, and a logfile option.
 %patch41 -p0
 
 %build
+autoreconf -fi
 %configure2_5x --with-xcdroast-libdir-prefix=%{_prefix}/lib/xcdroast-0.98 --enable-gtk2
 %make PREFIX=%{_prefix}
 
