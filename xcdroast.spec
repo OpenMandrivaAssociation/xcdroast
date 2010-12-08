@@ -1,6 +1,6 @@
 %define	alpharel	alpha15
 %define	alpha		15
-%define	rel		39
+%define	rel		40
 %define release		%mkrel 0.a%{alpha}.%{rel}
 
 Summary:	A GUI program for burning CDs
