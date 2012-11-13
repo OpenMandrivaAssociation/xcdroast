@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 06_man.dpatch by  <Hector Garcia <hector@debian.org>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad trunk~/man/xcdroast.1 trunk/man/xcdroast.1
+--- trunk~/man/xcdroast.1	2006-01-20 17:39:36.000000000 +0100
++++ trunk/man/xcdroast.1	2006-01-20 17:40:40.000000000 +0100
+@@ -84,7 +84,7 @@
+ fine.)
+ 
+ .SH BUGS 
+-This 'man' page is to short. Really useable information can be found
++This 'man' page is too short. Really useable information can be found
+ in the documentation included with X-CD-Roast, in the FAQ
+ on 
+ .IR http://www.xcdroast.org/faq 

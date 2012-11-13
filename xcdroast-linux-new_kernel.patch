@@ -1,0 +1,50 @@
+# Patch written by Michael Collard <quadfour@iinet.net.au> 28/06/05
+--- src/io.c 2003-10-26 22:24:48.000000000 +0800
++++ src/io.c 2005-06-28 22:06:56.000000000 +0800
+@@ -10378,7 +10378,7 @@
+ 	 strcat(ret,tmp);
+ #endif
+ 	 /* old nonroot mode - 2755 */
+-	 g_snprintf(tmp,MAXLINE,"%s 4755 %s\n", cmd_chmod, bin);
++	 g_snprintf(tmp,MAXLINE,"%s 755 %s\n", cmd_chmod, bin);
+ 	 strcat(ret,tmp);
+
+
+@@ -10457,7 +10457,7 @@
+ 		free_nonrootvalues(&nrs_vals);
+ #endif
+ 	 	g_snprintf(bin,MAXLINE,"%s/%s", libdir, WRAPPER);
+-	 	g_snprintf(tmp,MAXLINE,"%s 755 %s\n", cmd_chmod, bin);
++	 	g_snprintf(tmp,MAXLINE,"%s 700 %s\n", cmd_chmod, bin);
+ 	 	strcat(ret,tmp);
+ 	}
+ 	return 0;
+--- src/init.c	2003-10-30 19:58:26.000000000 +0800
++++ src/init.c	2005-06-28 22:15:35.000000000 +0800
+@@ -350,16 +350,10 @@
+
+ 	/* file does exist? */
+ 	if (stat(file,&buf) == 0) {
+-/*
+-		if (!(buf.st_mode & S_ISGID)) {
+-			g_warning("Installation problem? No set-gid bit on %s\n", file);
+-			dodebug(1,"Warning: No set-gid bit on %s\n", file);
+-		}
+-*/
+ 
+ 		return buf.st_gid;
+ 	}
+-	if (!isroot()) {
++	else {
+ 		g_warning("Installation problem? %s not found.\n", file); 
+ 	}
+ 	return (gid_t) -1;
+@@ -683,7 +676,7 @@
+
+ 	/* check file mode of wrapper */
+ 	if (stat(tmp,&buf) == 0) {
+-		if (buf.st_mode != 0104755) {
++		if (buf.st_mode != 0100755) {
+ 			dodebug(3,"Note: %s wrong modes set (0%o)\n", tmp, buf.st_mode);
+ 			nofail = 0;
+ 		}

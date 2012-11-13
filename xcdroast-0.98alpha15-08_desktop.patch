@@ -1,0 +1,22 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 08_desktop.dpatch by  <Hector Garcia <hector@debian.org>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad trunk~/extra/xcdroast.desktop trunk/extra/xcdroast.desktop
+--- trunk~/extra/xcdroast.desktop	2006-01-20 13:34:14.000000000 +0100
++++ trunk/extra/xcdroast.desktop	2006-02-26 18:33:05.000000000 +0100
+@@ -1,6 +1,8 @@
+ [Desktop Entry]
++Encoding=UTF-8
+ Name=X-CD-Roast
++Comment=Create a CD
++Exec=xcdroast
++Icon=xcdroast.xpm
+ Type=Application
+-Exec=/usr/bin/xcdroast
+-Comment=CD creation tool
+-Icon=/usr/lib/xcdroast-0.98/icons/xcdricon.png
++Categories=Application;AudioVideo;

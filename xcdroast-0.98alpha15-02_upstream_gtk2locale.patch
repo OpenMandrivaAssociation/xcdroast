@@ -1,0 +1,26 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 02_upstream_gtk2locale.patch.dpatch by  <Hector Garcia <hector@debian.org>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad trunk~/src/xtools.c trunk/src/xtools.c
+--- trunk~/src/xtools.c	2006-01-20 16:07:46.000000000 +0100
++++ trunk/src/xtools.c	2006-01-20 16:08:06.000000000 +0100
+@@ -3662,9 +3662,13 @@
+ 	if (c_locale_is_utf8)
+ 		return str;
+ 
+-	/* should be logical to use g_filename_from_utf8() here, but
+-	   somehow this works not correctly on my testsystem */
++#ifdef BROKEN_GTK2_LOCALE
++	/* on my redhat 7.3 system it does only work that way, but
++	   on other systems the correct way is in the #else branch */ 
+ 	locstr = g_locale_from_utf8(str, strlen(str), &in, &out, NULL);
++#else
++	locstr = g_filename_from_utf8(str, strlen(str), &in, &out, NULL);
++#endif
+ 	if (locstr) {
+ 		strncpy(str, locstr, MAXLINE);
+ 	}

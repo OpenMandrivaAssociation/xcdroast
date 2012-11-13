@@ -1,0 +1,28 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 03_upstream_64bit_gsize.patch.dpatch by  <Hector Garcia <hector@debian.org>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad trunk~/src/xtools.c trunk/src/xtools.c
+--- trunk~/src/xtools.c	2006-01-20 16:07:46.000000000 +0100
++++ trunk/src/xtools.c	2006-01-20 16:10:23.000000000 +0100
+@@ -3635,7 +3635,7 @@
+ 	return str;
+ #else
+ gchar *locstr;
+-gint in, out;
++gsize in, out;
+ 
+ 	locstr = g_locale_from_utf8(str, strlen(str), &in, &out, NULL);
+ 	if (locstr) {
+@@ -3655,7 +3655,7 @@
+ 	return str;
+ #else
+ gchar *locstr;
+-gint in, out;
++gsize in, out;
+ 
+ 	/* ok, if your filesystem is already UTF8 we are not 
+ 	   allowed to change the filenames here. */

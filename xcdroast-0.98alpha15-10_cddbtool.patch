@@ -1,0 +1,56 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 10_cddbtool.dpatch by  <Hector Garcia <hector@debian.org>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Patch to suppor sending utf8 char when using gtk2.
+## DP: Provided by Robert Grimm. #336202
+
+@DPATCH@
+diff -urNad trunk~/src/cddbtool.c trunk/src/cddbtool.c
+--- trunk~/src/cddbtool.c	2006-05-04 13:39:56.000000000 +0200
++++ trunk/src/cddbtool.c	2006-05-04 13:40:52.000000000 +0200
+@@ -46,7 +46,11 @@
+ 
+ #define CDDB_HTTP_CMD	"GET http://%s/~cddb/cddb.cgi?cmd="
+ #define CDDB_HTTP_KEEP	" HTTP/1.0\r\nHost: %s\r\nConnection: Keep-Alive\r\nProxy-Connection: Keep-Alive\r\n%s\r\n"
++#if GTK_MAJOR_VERSION < 2
+ #define CDDB_HTTP_HELLO	"hello=%s+%s+xcdroast+%s&proto=1"CDDB_HTTP_KEEP
++#else
++#define CDDB_HTTP_HELLO "hello=%s+%s+xcdroast+%s&proto=6"CDDB_HTTP_KEEP
++#endif
+ #define CDDB_HTTP_STAT	CDDB_HTTP_CMD"stat&"CDDB_HTTP_HELLO
+ #define CDDB_HTTP_MOTD	CDDB_HTTP_CMD"motd&"CDDB_HTTP_HELLO
+ #define CDDB_HTTP_QUERY	CDDB_HTTP_CMD"cddb+query+%s&"CDDB_HTTP_HELLO
+@@ -240,11 +244,30 @@
+ 		fflush(stdout);
+ 		return 1;
+ 	}
+-
++	
++#if GTK_MAJOR_VERSION > 1
++	
++	g_snprintf(tmp,MAXLINE,"%s %d\r\n", "proto", 6);
++	if (writen(sockfd,tmp,strlen(tmp), 1) != strlen(tmp)) {
++                g_print("Error: write error on socket when setting protocol\n");
++                fflush(stdout);
++                return 1;
++        }
++        n = read_line2(sockfd, tmp, MAXLINE, 1);
++        if (n < 0) {
++                g_print("Error: read error on socket when setting protocol\n");
++                fflush(stdout);
++                return 1;
++        }
++#endif	
+ 	code = get_cddb_code(tmp);
+ 	switch(code) {
+-		/* all ok */
++		/* all ok  */
++#if GTK_MAJOR_VERSION < 2
+ 		case 200:
++#else
++		case 201:
++#endif
+ 			return 0;
+ 
+ 		/* handshake failed */

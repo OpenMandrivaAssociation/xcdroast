@@ -1,0 +1,11 @@
+--- src/setup.c.str	2010-02-20 18:27:41.000000000 +0100
++++ src/setup.c	2010-02-20 18:27:52.000000000 +0100
+@@ -4475,7 +4475,7 @@
+ 		if (!textonly) {
+ 			show_dialog(ICO_ERROR,tmp, T_OK, NULL, NULL, 0);
+ 		} else {
+-			g_warning(tmp);
++			g_warning("%s", tmp);
+ 		}
+ 	}	
+ }

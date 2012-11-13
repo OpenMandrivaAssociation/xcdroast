@@ -1,0 +1,29 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 11_mkisofs_options.dpatch by  <Hector Garcia <hector@debian.org>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Support for changes on mkisofs.
+
+@DPATCH@
+Index: src/io.c
+===================================================================
+--- src/io.c.orig	2006-11-05 12:52:46.000000000 +0100
++++ src/io.c	2006-11-05 12:52:55.000000000 +0100
+@@ -9027,7 +9027,7 @@
+ 		strcat(tmp2,"-D ");
+ 	}
+ 	if (masterparam.opt[7]) {
+-		strcat(tmp2,"-L ");
++		strcat(tmp2,"-allow-leading-dots ");
+ 	}
+ 	if (masterparam.opt[8]) {
+ 		strcat(tmp2,"-d ");
+@@ -9161,7 +9161,7 @@
+ 	}	
+ 	if (masterparam.publisher) {
+ 		strcpy(tmptmp, masterparam.publisher);
+-		g_snprintf(tmp5,MAXLINE,"-P \"%s\" ",
++		g_snprintf(tmp5,MAXLINE,"-publisher \"%s\" ",
+ 			convert_escape(tmptmp));
+ 		strcat(tmp4,tmp5);
+ 	}	

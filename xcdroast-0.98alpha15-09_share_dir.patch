@@ -1,0 +1,512 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 09_share_dir.dpatch by  <Hector Garcia <hector@debian.org>>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Patch to provide different paths to /usr/lib and /usr/share.
+
+@DPATCH@
+diff -urNad trunk~/Makefile.in trunk/Makefile.in
+--- trunk~/Makefile.in	2006-05-06 15:54:43.000000000 +0200
++++ trunk/Makefile.in	2006-05-06 15:55:04.000000000 +0200
+@@ -108,6 +108,7 @@
+ USE_NONROOTMODE = @USE_NONROOTMODE@
+ VERSION = @VERSION@
+ XCDRLIB_PREFIX = @XCDRLIB_PREFIX@
++XCDRSHARE_PREFIX = @XCDRSHARE_PREFIX@
+ am__include = @am__include@
+ am__quote = @am__quote@
+ install_sh = @install_sh@
+diff -urNad trunk~/acinclude.m4 trunk/acinclude.m4
+--- trunk~/acinclude.m4	2006-05-06 15:18:20.000000000 +0200
++++ trunk/acinclude.m4	2006-05-06 15:54:54.000000000 +0200
+@@ -24,7 +24,7 @@
+ AC_DEFUN(AM_PATH_XCDRLIBDIR,
+ [ AC_ARG_WITH(xcdroast-libdir-prefix,
+             AC_HELP_STRING([--with-xcdroast-libdir-prefix=PFX],
+-                           [set where the utils/images of xcdroast should be installed - default: PREFIX/lib/xcdroast-0.98]),
++                           [set where the utils of xcdroast should be installed - default: PREFIX/lib/xcdroast-0.98]),
+      xcdrlibdir_config_prefix="$withval", xcdrlibdir_config_prefix="")
+ 
+     if test "x$xcdrlibdir_config_prefix" = "x"; then
+@@ -38,6 +38,26 @@
+     AC_SUBST(XCDRLIB_PREFIX)
+ ])
+ 
++dnl AM_PATH_XCDRSHAREDIR([MINIMUM-VERSION,
++dnl               [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND ]]])
++dnl
++AC_DEFUN(AM_PATH_XCDRSHAREDIR,
++[ AC_ARG_WITH(xcdroast-sharedir-prefix,
++            AC_HELP_STRING([--with-xcdroast-sharedir-prefix=PFX],
++                           [set where the images of xcdroast should be installed - default: PREFIX/share/xcdroast-0.98]),
++     xcdrsharedir_config_prefix="$withval", xcdrsharedir_config_prefix="")
++
++    if test "x$xcdrsharedir_config_prefix" = "x"; then
++	XCDRSHARE_PREFIX="$prefix/share/xcdroast-0.98"
++    else 	
++    	XCDRSHARE_PREFIX=$xcdrsharedir_config_prefix
++    fi
++    if test "X$XCDRSHARE_PREFIX" = "XNONE/share/xcdroast-0.98"; then
++    	XCDRSHARE_PREFIX="$ac_default_prefix/share/xcdroast-0.98"
++    fi 
++    AC_SUBST(XCDRSHARE_PREFIX)
++])
++
+ dnl AM_DEP_NONROOTMODE([MINIMUM-VERSION,
+ dnl               [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND ]]])
+ dnl
+diff -urNad trunk~/aclocal.m4 trunk/aclocal.m4
+--- trunk~/aclocal.m4	2006-05-06 15:18:20.000000000 +0200
++++ trunk/aclocal.m4	2006-05-06 15:54:54.000000000 +0200
+@@ -51,6 +51,26 @@
+     AC_SUBST(XCDRLIB_PREFIX)
+ ])
+ 
++dnl AM_PATH_XCDRSHAREDIR([MINIMUM-VERSION,
++dnl               [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND ]]])
++dnl
++AC_DEFUN(AM_PATH_XCDRSHAREDIR,
++[ AC_ARG_WITH(xcdroast-sharedir-prefix,
++            AC_HELP_STRING([--with-xcdroast-sharedir-prefix=PFX],
++                           [set where the images of xcdroast should be installed - default: PREFIX/share/xcdroast-0.98]),
++     xcdrsharedir_config_prefix="$withval", xcdrsharedir_config_prefix="")
++
++    if test "x$xcdrsharedir_config_prefix" = "x"; then
++	XCDRSHARE_PREFIX="$prefix/share/xcdroast-0.98"
++    else 	
++    	XCDRSHARE_PREFIX=$xcdrsharedir_config_prefix
++    fi
++    if test "X$XCDRSHARE_PREFIX" = "XNONE/share/xcdroast-0.98"; then
++    	XCDRSHARE_PREFIX="$ac_default_prefix/share/xcdroast-0.98"
++    fi 
++    AC_SUBST(XCDRSHARE_PREFIX)
++])
++
+ dnl AM_DEP_NONROOTMODE([MINIMUM-VERSION,
+ dnl               [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND ]]])
+ dnl
+diff -urNad trunk~/configure.in trunk/configure.in
+--- trunk~/configure.in	2006-05-06 15:54:54.000000000 +0200
++++ trunk/configure.in	2006-05-06 15:54:54.000000000 +0200
+@@ -96,6 +96,7 @@
+ 
+ AM_PATH_CDRTOOLS
+ AM_PATH_XCDRLIBDIR
++AM_PATH_XCDRSHAREDIR
+ AM_DEP_NONROOTMODE
+ AM_DEP_ENABLEGTK2
+ 
+diff -urNad trunk~/src/Makefile.am trunk/src/Makefile.am
+--- trunk~/src/Makefile.am	2006-05-06 15:18:20.000000000 +0200
++++ trunk/src/Makefile.am	2006-05-06 15:54:54.000000000 +0200
+@@ -23,7 +23,7 @@
+ 	setup.c io.c duplicate.c wav_frontend.c wav_id.c create.c \
+ 	largefile.h language.h main.h xcdrdata.h xcdroast.h gettext.h
+ 
+-xcdroast_CFLAGS = $(GNUCFLAGS) $(GDK_PIXBUF_CFLAGS) $(EXTRA_CFLAGS) $(AM_CFLAGS) -DPRE_PREFIX="\"$(prefix)\"" -DPRE_LIBDIR="\"$(XCDRLIB_PREFIX)\"" -DCDRTOOLS_PREFIX="\"$(CDRTOOLS_PREFIX)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" -DUSE_NONROOTMODE="$(USE_NONROOTMODE)"
++xcdroast_CFLAGS = $(GNUCFLAGS) $(GDK_PIXBUF_CFLAGS) $(EXTRA_CFLAGS) $(AM_CFLAGS) -DPRE_PREFIX="\"$(prefix)\"" -DPRE_LIBDIR="\"$(XCDRLIB_PREFIX)\"" -DPRE_SHAREDIR="\"$(XCDRSHARE_PREFIX)\"" -DCDRTOOLS_PREFIX="\"$(CDRTOOLS_PREFIX)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" -DUSE_NONROOTMODE="$(USE_NONROOTMODE)"
+ xcdroast_LDFLAGS = $(EXTRA_LDFLAGS)
+ xcdroast_LDADD = @LIBINTL@ @ALLOCA@ $(GTK_LIBS) $(GDK_PIXBUF_LIBS) $(AUDIO_LIBS)
+ 
+@@ -48,5 +48,5 @@
+ cddbtool_LDADD = $(GLIB_LIBS)
+ 
+ xcdrwrap_SOURCES = xcdrwrap.c largefile.h xcdroast.h
+-xcdrwrap_CFLAGS = $(GNUCFLAGS) $(EXTRA_CFLAGS) $(AM_CFLAGS) -DPRE_PREFIX="\"$(prefix)\"" -DPRE_LIBDIR="\"$(XCDRLIB_PREFIX)\"" -DCDRTOOLS_PREFIX="\"$(CDRTOOLS_PREFIX)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" -DUSE_NONROOTMODE="$(USE_NONROOTMODE)"
++xcdrwrap_CFLAGS = $(GNUCFLAGS) $(EXTRA_CFLAGS) $(AM_CFLAGS) -DPRE_PREFIX="\"$(prefix)\"" -DPRE_LIBDIR="\"$(XCDRLIB_PREFIX)\"" -DPRE_SHAREDIR="\"$(XCDRSHARE_PREFIX)\"" -DCDRTOOLS_PREFIX="\"$(CDRTOOLS_PREFIX)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" -DUSE_NONROOTMODE="$(USE_NONROOTMODE)"
+ 
+diff -urNad trunk~/src/Makefile.in trunk/src/Makefile.in
+--- trunk~/src/Makefile.in	2006-05-06 15:54:37.000000000 +0200
++++ trunk/src/Makefile.in	2006-05-06 15:55:04.000000000 +0200
+@@ -108,6 +108,7 @@
+ USE_NONROOTMODE = @USE_NONROOTMODE@
+ VERSION = @VERSION@
+ XCDRLIB_PREFIX = @XCDRLIB_PREFIX@
++XCDRSHARE_PREFIX = @XCDRSHARE_PREFIX@
+ am__include = @am__include@
+ am__quote = @am__quote@
+ install_sh = @install_sh@
+@@ -134,7 +135,7 @@
+ 	largefile.h language.h main.h xcdrdata.h xcdroast.h gettext.h
+ 
+ 
+-xcdroast_CFLAGS = $(GNUCFLAGS) $(GDK_PIXBUF_CFLAGS) $(EXTRA_CFLAGS) $(AM_CFLAGS) -DPRE_PREFIX="\"$(prefix)\"" -DPRE_LIBDIR="\"$(XCDRLIB_PREFIX)\"" -DCDRTOOLS_PREFIX="\"$(CDRTOOLS_PREFIX)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" -DUSE_NONROOTMODE="$(USE_NONROOTMODE)"
++xcdroast_CFLAGS = $(GNUCFLAGS) $(GDK_PIXBUF_CFLAGS) $(EXTRA_CFLAGS) $(AM_CFLAGS) -DPRE_PREFIX="\"$(prefix)\"" -DPRE_LIBDIR="\"$(XCDRLIB_PREFIX)\"" -DPRE_SHAREDIR="\"$(XCDRSHARE_PREFIX)\"" -DCDRTOOLS_PREFIX="\"$(CDRTOOLS_PREFIX)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" -DUSE_NONROOTMODE="$(USE_NONROOTMODE)"
+ xcdroast_LDFLAGS = $(EXTRA_LDFLAGS)
+ xcdroast_LDADD = @LIBINTL@ @ALLOCA@ $(GTK_LIBS) $(GDK_PIXBUF_LIBS) $(AUDIO_LIBS)
+ 
+@@ -159,7 +160,7 @@
+ cddbtool_LDADD = $(GLIB_LIBS)
+ 
+ xcdrwrap_SOURCES = xcdrwrap.c largefile.h xcdroast.h
+-xcdrwrap_CFLAGS = $(GNUCFLAGS) $(EXTRA_CFLAGS) $(AM_CFLAGS) -DPRE_PREFIX="\"$(prefix)\"" -DPRE_LIBDIR="\"$(XCDRLIB_PREFIX)\"" -DCDRTOOLS_PREFIX="\"$(CDRTOOLS_PREFIX)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" -DUSE_NONROOTMODE="$(USE_NONROOTMODE)"
++xcdrwrap_CFLAGS = $(GNUCFLAGS) $(EXTRA_CFLAGS) $(AM_CFLAGS) -DPRE_PREFIX="\"$(prefix)\"" -DPRE_LIBDIR="\"$(XCDRLIB_PREFIX)\"" -DPRE_SHAREDIR="\"$(XCDRSHARE_PREFIX)\"" -DCDRTOOLS_PREFIX="\"$(CDRTOOLS_PREFIX)\"" -DSYSCONFDIR="\"$(sysconfdir)\"" -DUSE_NONROOTMODE="$(USE_NONROOTMODE)"
+ subdir = src
+ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+ CONFIG_HEADER = $(top_builddir)/config.h
+diff -urNad trunk~/src/init.c trunk/src/init.c
+--- trunk~/src/init.c	2006-05-06 15:52:32.000000000 +0200
++++ trunk/src/init.c	2006-05-06 15:54:54.000000000 +0200
+@@ -73,6 +73,7 @@
+ gchar username[MAXLINE];
+ gchar configdir[MAXLINE];
+ gchar sharedir[MAXLINE];
++gchar libdir[MAXLINE];
+ gchar rootconfig[MAXLINE];
+ gchar prefixdir[MAXLINE];
+ gint support_ontheflyaudio;
+@@ -499,13 +500,13 @@
+ 		gtk_exit(1);
+ 	}
+ 
+-	g_snprintf(tmp,MAXLINE,"%s/%s", sharedir, WAVPLAY);
++	g_snprintf(tmp,MAXLINE,"%s/%s", libdir, WAVPLAY);
+ 	check_executable(tmp,NULL,1);
+-	g_snprintf(tmp,MAXLINE,"%s/%s", sharedir, RMTOOL);
++	g_snprintf(tmp,MAXLINE,"%s/%s", libdir, RMTOOL);
+ 	check_executable(tmp,NULL,1);
+-	g_snprintf(tmp,MAXLINE,"%s/%s", sharedir, VRFYTOOL);
++	g_snprintf(tmp,MAXLINE,"%s/%s", libdir, VRFYTOOL);
+ 	check_executable(tmp,NULL,1);
+-	g_snprintf(tmp,MAXLINE,"%s/%s", sharedir, CDDBTOOL);
++	g_snprintf(tmp,MAXLINE,"%s/%s", libdir, CDDBTOOL);
+ 	check_executable(tmp,NULL,1);
+ 
+ 	return isProDVD;
+@@ -520,7 +521,7 @@
+ gchar tmp[MAXLINE];
+ gint stat;
+ 
+-	g_snprintf(tmp,MAXLINE,"%s/%s", sharedir, WRAPPER);
++	g_snprintf(tmp,MAXLINE,"%s/%s", libdir, WRAPPER);
+ 	check_executable(tmp,NULL,1);
+ 
+ 	/* security check. If this fails then the wrapper is wrong */
+@@ -662,7 +663,7 @@
+ 	nofail = 1;
+ 	
+ 	/* first check if the wrapper got the correct permissions */
+-	g_snprintf(tmp,MAXLINE,"%s/%s", sharedir, WRAPPER);
++	g_snprintf(tmp,MAXLINE,"%s/%s", libdir, WRAPPER);
+ 	wrap_uid = get_file_owner(tmp);
+ 	wrap_gid = sgid_set(tmp);
+ 
+@@ -764,7 +765,7 @@
+ 	g_print("Options:\n");
+ 	g_print("\t-d <debug level>\n");
+ 	g_print("\t-c <config directory>  (currently: %s)\n", configdir);
+-	g_print("\t-l <lib directory>     (currently: %s)\n", sharedir);
++	g_print("\t-l <lib directory>     (currently: %s)\n", libdir);
+ /*	g_print("\t-r <root config-file>  (currently: %s)\n", rootconfig); */
+ 	g_print("\t-o : Disable multibyte font support\n");
+ 	g_print("\t-n : Disable cdrtools version check (use at own risk)\n");
+@@ -813,11 +814,17 @@
+ 	writerreaderdevs = NULL;
+ 
+ #ifdef PRE_LIBDIR 
+-	/* use prefix as sharedir as it came from the makefile-option */
+-	strncpy(sharedir, PRE_LIBDIR, MAXLINE);
++	/* use prefix as libdir as it came from the makefile-option */
++	strncpy(libdir, PRE_LIBDIR, MAXLINE);
+ #else
+ 	/* otherwise install our default prefix */
+-	strncpy(sharedir, LIBDIR, MAXLINE);
++	strncpy(libdir, LIBDIR, MAXLINE);
++#endif
++
++#ifdef PRE_SHAREDIR
++	strncpy(sharedir, PRE_SHAREDIR, MAXLINE);
++#else
++	strncpy(sharedir, SHAREDIR, MAXLINE);
+ #endif
+ 
+ #ifdef CDRTOOLS_PREFIX
+@@ -851,7 +858,7 @@
+ 		break;
+ */
+ 	case 'l':
+-		strncpy(sharedir, optarg, MAXLINE);
++		strncpy(libdir, optarg, MAXLINE);
+ 		break;
+ 
+ 	case 'a':
+@@ -908,7 +915,7 @@
+ 	dodebug(1, "debug level: %d\n", debug);
+ 	dodebug(1, "configdir: %s\n", configdir);
+ 	dodebug(1, "rootconfig: %s\n", rootconfig);
+-	dodebug(1, "libdir: %s\n",sharedir);
++	dodebug(1, "libdir: %s\n",libdir);
+ 	dodebug(1, "checking large file support: sizeof(off_t) = %d\n", sizeof(off_t));
+ 
+ 	/* gettext stuff */
+diff -urNad trunk~/src/io.c trunk/src/io.c
+--- trunk~/src/io.c	2006-05-06 15:18:20.000000000 +0200
++++ trunk/src/io.c	2006-05-06 15:54:54.000000000 +0200
+@@ -114,6 +114,7 @@
+ extern gchar hostname[MAXLINE];
+ extern gchar username[MAXLINE];
+ extern gchar sharedir[MAXLINE];
++extern gchar libdir[MAXLINE];
+ extern gchar configdir[MAXLINE];
+ extern gchar prefixdir[MAXLINE];
+ extern GtkWidget *cddb_info_label;
+@@ -7863,7 +7864,7 @@
+ 	gtk_label_set_text(GTK_LABEL(readtrack_info_label), _("Deleting tracks..."));
+ 
+ 	/* build of command line */
+-	g_snprintf(orgcmd,MAXLINE,"%s/%s ", sharedir, RMTOOL);
++	g_snprintf(orgcmd,MAXLINE,"%s/%s ", libdir, RMTOOL);
+ 	strcpy(cmd,orgcmd);
+ 
+ 	length = g_list_length(delfiles);
+@@ -8094,7 +8095,7 @@
+ 
+ 	/* always verify in 512 bytes blocks */
+ 	g_snprintf(cmd2,MAXLINE,"%s/%s -b \"%s\" -", 
+-		   sharedir, VRFYTOOL, convert_escape(tmptmp));
++		   libdir, VRFYTOOL, convert_escape(tmptmp));
+ 
+ 	dodebug(1, "spawning: %s | %s\n",cmd,cmd2);
+ 	dolog(2, "Verify data track %s\n", fname);
+@@ -8224,7 +8225,7 @@
+ 	
+ 	strcpy(tmptmp,fname);
+ 	g_snprintf(cmd2,MAXLINE,"%s/%s -a \"%s\" -", 
+-		   sharedir, VRFYTOOL, convert_escape(tmptmp));
++		   libdir, VRFYTOOL, convert_escape(tmptmp));
+ 
+ 	dodebug(1, "spawning: %s | %s\n",cmd,cmd2);
+ 	dolog(2, "Verify audio track %s\n", fname);
+@@ -8521,7 +8522,7 @@
+ 	if (setupdata.cddb_use_http == 0) {
+ 	  	g_snprintf(cmd,MAXLINE,
+ 		"%s/%s -s \"%s\" -p %d -u \"%s\" -h \"%s\" -q \"%s\"", 
+-		sharedir, CDDBTOOL, tmp_cddbhost, setupdata.cddb_port,
++		libdir, CDDBTOOL, tmp_cddbhost, setupdata.cddb_port,
+ 		username, hostname, tmp);
+ 	} else {
+ 		/* we want to use http */
+@@ -8529,13 +8530,13 @@
+ 			/* but no proxy */
+ 	  		g_snprintf(cmd,MAXLINE,
+ 			"%s/%s -s \"%s\" -u \"%s\" -h \"%s\" -H -q \"%s\"", 
+-			sharedir, CDDBTOOL, tmp_cddbhost, 
++			libdir, CDDBTOOL, tmp_cddbhost, 
+ 			username, hostname, tmp);
+ 		} else {
+ 			/* http with proxy */
+ 	  		g_snprintf(cmd,MAXLINE,
+ 			"%s/%s -s \"%s\" -u \"%s\" -h \"%s\" -U \"%s\" -P %d -q \"%s\"", 
+-			sharedir, CDDBTOOL, tmp_cddbhost, 
++			libdir, CDDBTOOL, tmp_cddbhost, 
+ 			username, hostname, tmp_cddbproxy,
+ 			setupdata.cddb_proxy_port, tmp);
+ 		}
+@@ -8593,8 +8594,8 @@
+ FILE *fpin;
+ 
+ 	/* allocate memory */
+-	g_snprintf(line,MAXLINE,"%s/%s -d \"%s\" \"%s/%s\" 2>&1", sharedir, 
+-			WAVPLAY, setupdata.dsp_device, sharedir, DSPTESTSOUND);
++	g_snprintf(line,MAXLINE,"%s/%s -d \"%s\" \"%s/%s\" 2>&1", libdir, 
++			WAVPLAY, setupdata.dsp_device, libdir, DSPTESTSOUND);
+ 
+ 	dodebug(1, "calling: %s\n", line);
+ 
+@@ -10224,8 +10225,8 @@
+ 		if (strncmp(line,"X-CD-Roast ", 11) == 0) {
+ 			strcpy(xcdrver,line+11);
+ 		}
+-		if (strncmp(line,"sharedir: ", 10) == 0) {
+-			strcpy(sharever,line+10);
++		if (strncmp(line,"libdir: ", 8) == 0) {
++			strcpy(sharever,line+8);
+ 		}
+ 		if (strncmp(line,"prefixdir: ", 11) == 0) {
+ 			strcpy(prefixver,line+11);
+@@ -10254,9 +10255,9 @@
+ 			tmp, xcdrver, XCDROAST_VERSION);
+ 		ret = 1;
+ 	}
+-	if (strcmp(sharever,sharedir) != 0) {
+-		fprintf(stderr, "WARNING: Wrapper %s configured\n\tsharedir %s instead of %s\n", 
+-			tmp, sharever, sharedir);
++	if (strcmp(sharever,libdir) != 0) {
++		fprintf(stderr, "WARNING: Wrapper %s configured\n\tlibdir %s instead of %s\n", 
++			tmp, sharever, libdir);
+ 		ret = 0;
+ 	}
+ 	if (strcmp(prefixver,prefixdir) != 0) {
+@@ -10370,7 +10371,7 @@
+ #endif
+ 	
+ 	 /* set the correct permissions to the wrapper */
+-	 g_snprintf(bin,MAXLINE,"%s/%s", sharedir, WRAPPER);
++	 g_snprintf(bin,MAXLINE,"%s/%s", libdir, WRAPPER);
+ 	 g_snprintf(tmp,MAXLINE,"%s root %s\n", cmd_chown, bin);
+ 	 strcat(ret,tmp);
+ #if 0
+@@ -10456,7 +10457,7 @@
+ 		}
+ 		free_nonrootvalues(&nrs_vals);
+ #endif
+-	 	g_snprintf(bin,MAXLINE,"%s/%s", sharedir, WRAPPER);
++	 	g_snprintf(bin,MAXLINE,"%s/%s", libdir, WRAPPER);
+ 	 	g_snprintf(tmp,MAXLINE,"%s 755 %s\n", cmd_chmod, bin);
+ 	 	strcat(ret,tmp);
+ 	}
+diff -urNad trunk~/src/main.c trunk/src/main.c
+--- trunk~/src/main.c	2006-05-06 15:52:28.000000000 +0200
++++ trunk/src/main.c	2006-05-06 15:54:54.000000000 +0200
+@@ -57,6 +57,7 @@
+ static gint lastxsize, lastysize;
+ 
+ extern gchar sharedir[MAXLINE];
++extern gchar libdir[MAXLINE];
+ extern gchar rootconfig[MAXLINE];
+ extern gchar xcdroast_version_loaded[MAXLINE];
+ 
+diff -urNad trunk~/src/menus.c trunk/src/menus.c
+--- trunk~/src/menus.c	2006-05-06 15:18:20.000000000 +0200
++++ trunk/src/menus.c	2006-05-06 15:54:54.000000000 +0200
+@@ -72,6 +72,7 @@
+ extern GList *tocfiles;
+ extern gint read_abort_mark;
+ extern gchar sharedir[MAXLINE];
++extern gchar libdir[MAXLINE];
+ extern GtkWidget *cdlist_l1, *imglist_l2;
+ extern GtkCList *cdlist, *imglist2;
+ extern gchar configdir[MAXLINE];
+diff -urNad trunk~/src/setup.c trunk/src/setup.c
+--- trunk~/src/setup.c	2006-05-06 15:18:20.000000000 +0200
++++ trunk/src/setup.c	2006-05-06 15:54:54.000000000 +0200
+@@ -61,6 +61,7 @@
+ extern gchar rootconfig[MAXLINE];
+ extern gchar xcdroast_version_loaded[MAXLINE];
+ extern gchar sharedir[MAXLINE];
++extern gchar libdir[MAXLINE];
+ extern gint altdevscan;
+ extern gchar security_key[MAXLINE];
+ 
+diff -urNad trunk~/src/wav_frontend.c trunk/src/wav_frontend.c
+--- trunk~/src/wav_frontend.c	2006-05-06 15:18:20.000000000 +0200
++++ trunk/src/wav_frontend.c	2006-05-06 15:54:54.000000000 +0200
+@@ -50,6 +50,7 @@
+ extern setup_data_t setupdata;
+ extern GList *imagelist;
+ extern gchar sharedir[MAXLINE];
++extern gchar libdir[MAXLINE];
+ 
+ gint wav_in, wavplay_quit;
+ GtkWidget *wav_quit_button;
+@@ -157,7 +158,7 @@
+ 	}
+ 
+ 	strcpy(tmptmp,filename);
+-	g_snprintf(cmd,MAXLINE,"%s/%s -g -d \"%s\" \"%s\" 2>&1", sharedir, WAVPLAY, 
++	g_snprintf(cmd,MAXLINE,"%s/%s -g -d \"%s\" \"%s\" 2>&1", libdir, WAVPLAY, 
+ 			setupdata.dsp_device, convert_escape(tmptmp));
+ 
+ 	dodebug(1, "spawning shell: %s\n",cmd);
+diff -urNad trunk~/src/xcdroast.h trunk/src/xcdroast.h
+--- trunk~/src/xcdroast.h	2006-05-06 15:18:20.000000000 +0200
++++ trunk/src/xcdroast.h	2006-05-06 15:54:54.000000000 +0200
+@@ -174,6 +174,7 @@
+ /* default paths/configfile */
+ #define PREFIX "/usr/local"
+ #define LIBDIR "lib/xcdroast-0.98"
++#define SHAREDIR "share/xcdroast-0.98"
+ #define CONFIGDIR "~/.xcdroast"
+ #define CONFFILE "xcdr098.cfg"
+ #define LOGFILE "xcdr098.log"
+diff -urNad trunk~/src/xcdrwrap.c trunk/src/xcdrwrap.c
+--- trunk~/src/xcdrwrap.c	2006-05-06 15:18:20.000000000 +0200
++++ trunk/src/xcdrwrap.c	2006-05-06 15:54:54.000000000 +0200
+@@ -91,6 +91,7 @@
+ 
+ 
+ static char sharedir[MAXLINE];
++static char libdir[MAXLINE];
+ static char prefixdir[MAXLINE];
+ static char rootconfig[MAXLINE];
+ static char username[MAXLINE];
+@@ -298,6 +299,7 @@
+ 	}
+ 	if (strncmp(cmd,"-V",MAXLINE) == 0) {
+ 		printf("X-CD-Roast %s\n", XCDROAST_VERSION);
++		printf("libdir: %s\n", libdir);
+ 		printf("sharedir: %s\n", sharedir);
+ 		printf("prefixdir: %s\n", prefixdir);
+ 
+@@ -359,8 +361,8 @@
+ 		return;
+ 	}
+ 
+-	/* otherwise its relative - add sharedir first */
+-	snprintf(ret,MAXLINE,"%s/%s", sharedir, app);
++	/* otherwise its relative - add libdir first */
++	snprintf(ret,MAXLINE,"%s/%s", libdir, app);
+ 
+ 	/* now check if this file does exist */
+ 	if (stat(ret,&buf) != 0) {
+@@ -613,11 +615,13 @@
+ 	seen_device_spec = 0;
+ 
+ #ifdef PRE_LIBDIR 
+-        /* use prefix as sharedir as it came from the makefile-option */
+-        strncpy(sharedir, PRE_LIBDIR, MAXLINE);
++        /* use prefix as libdir as it came from the makefile-option */
++        strncpy(libdir, PRE_LIBDIR, MAXLINE);
++		strncpy(sharedir, PRE_SHAREDIR, MAXLINE);
+ #else
+         /* otherwise install our default prefix */
+-        strncpy(sharedir, LIBDIR, MAXLINE);
++        strncpy(libdir, LIBDIR, MAXLINE);
++		strncpy(sharedir, SHAREDIR, MAXLINE);
+ #endif
+ 
+ #ifdef CDRTOOLS_PREFIX
+diff -urNad trunk~/src/xtools.c trunk/src/xtools.c
+--- trunk~/src/xtools.c	2006-05-06 15:54:54.000000000 +0200
++++ trunk/src/xtools.c	2006-05-06 15:54:54.000000000 +0200
+@@ -58,6 +58,7 @@
+ extern gint bigfonts;
+ extern gint oldfontcode;
+ extern gchar sharedir[MAXLINE];
++extern gchar libdir[MAXLINE];
+ extern gchar prefixdir[MAXLINE];
+ extern gint c_locale_is_utf8;
+ 
+@@ -2361,8 +2362,8 @@
+ 		return;
+ 	}
+ 
+-	/* otherwise its relative - add sharedir first */
+-	g_snprintf(ret,MAXLINE,"%s/%s", sharedir, app);
++	/* otherwise its relative - add libdir first */
++	g_snprintf(ret,MAXLINE,"%s/%s", libdir, app);
+ 
+ 	/* now check if this file does exist */
+ 	if (stat(ret,&buf) != 0) {
+@@ -2380,7 +2381,7 @@
+ gchar *get_wrap_path(gchar *cmd, gchar *ret) {
+ gchar tmp[MAXLINE];
+ 
+-	g_snprintf(tmp,MAXLINE,"%s/%s %s", sharedir, WRAPPER, cmd);
++	g_snprintf(tmp,MAXLINE,"%s/%s %s", libdir, WRAPPER, cmd);
+ 	strncpy(ret, tmp, MAXLINE);
+ 
+ 	return ret;
+@@ -2394,10 +2395,10 @@
+ 
+ 	/* use DVD version if installed and media type > 1GB */
+ 	if (curset.isProDVD && curset.cdrtype > 1000) {
+-		g_snprintf(tmp,MAXLINE,"%s/%s %s", sharedir, WRAPPER, 
++		g_snprintf(tmp,MAXLINE,"%s/%s %s", libdir, WRAPPER, 
+ 			"CDRECORDPRODVD");
+ 	} else {
+-		g_snprintf(tmp,MAXLINE,"%s/%s %s", sharedir, WRAPPER, 
++		g_snprintf(tmp,MAXLINE,"%s/%s %s", libdir, WRAPPER, 
+ 			"CDRECORD");
+ 	}
+ 	strncpy(ret, tmp, MAXLINE);

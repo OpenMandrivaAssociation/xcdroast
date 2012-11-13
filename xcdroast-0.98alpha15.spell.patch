@@ -1,0 +1,352 @@
+--- xcdroast-0.98alpha15/po/bg.po.spell	2004-08-25 14:28:16.632465995 +0200
++++ xcdroast-0.98alpha15/po/bg.po	2004-08-25 14:28:43.906404092 +0200
+@@ -3515,7 +3515,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/ca.po.spell	2004-08-25 14:28:16.635465218 +0200
++++ xcdroast-0.98alpha15/po/ca.po	2004-08-25 14:28:43.924399433 +0200
+@@ -3798,7 +3798,7 @@
+ msgstr "Afegeix un dispositÌu manualment."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Mireu http://www.xcdroast.org/faq si noteu a faltar una unitat en aquesta "
+ "llista."
+--- xcdroast-0.98alpha15/po/cs.po.spell	2004-08-25 14:28:16.639464183 +0200
++++ xcdroast-0.98alpha15/po/cs.po	2004-08-25 14:28:43.944394255 +0200
+@@ -3751,7 +3751,7 @@
+ msgstr "P¯idat za¯ÌzenÌ, kterÈ nebylo rozpoznanÈ automatick˝m vyhled·v·nÌm."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "PodÌvejte se na http://www.xcdroast.org/faq pokud postr·d·te seznam za¯ÌzenÌ."
+ 
+--- xcdroast-0.98alpha15/po/da.po.spell	2004-08-25 14:28:16.642463406 +0200
++++ xcdroast-0.98alpha15/po/da.po	2004-08-25 14:28:43.954391667 +0200
+@@ -3500,7 +3500,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/de.po.spell	2004-08-25 14:28:16.646462371 +0200
++++ xcdroast-0.98alpha15/po/de.po	2004-08-25 14:28:43.972387007 +0200
+@@ -3838,7 +3838,7 @@
+ "wurde."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Bitte http://www.xcdroast.org/faq besuchen, wenn Sie hier ein Laufwerk "
+ "vermissen."
+--- xcdroast-0.98alpha15/po/el_GR.po.spell	2004-08-25 14:28:16.649461594 +0200
++++ xcdroast-0.98alpha15/po/el_GR.po	2004-08-25 14:28:43.989382607 +0200
+@@ -3850,7 +3850,7 @@
+ "–ÒÔÛËﬁÍÁ ÛıÛÍÂıﬁÚ Á ÔÔﬂ· ‰ÂÌ ·Ì·„Ì˘ÒﬂÛÙÁÍÂ Í·Ù‹ ÙÁÌ ·ıÙ¸Ï·ÙÁ ·Ìﬂ˜ÌÂıÛÁ."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "–·Ò·Í·Î˛ ‰ÂﬂÙÂ ÛÙÔ http://www.xcdroast.org/faq ¸Ù·Ì ·ÔıÛÈ‹ÊÂÈ ›Ì· drive ÛÙÁ "
+ "ÎﬂÛÙ·."
+--- xcdroast-0.98alpha15/po/es.po.spell	2004-08-25 14:28:16.652460817 +0200
++++ xcdroast-0.98alpha15/po/es.po	2004-08-25 14:28:44.005378465 +0200
+@@ -3518,7 +3518,7 @@
+ msgstr "AÒadir un dispositivo que no es reconocido autom·ticamente."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Por favor, visite http://www.xcdroast.org/faq si pierde una unidad de la "
+ "lista"
+--- xcdroast-0.98alpha15/po/et.po.spell	2004-08-25 14:28:16.654460300 +0200
++++ xcdroast-0.98alpha15/po/et.po	2004-08-25 14:28:44.012376653 +0200
+@@ -3485,7 +3485,7 @@
+ msgstr "Lisa seade, mida automaatselt otsides ei leitud."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Palun vaata http://www.xcdroast.org/faq, kui seade on nimekirjast puudu."
+ 
+--- xcdroast-0.98alpha15/po/fi.po.spell	2004-08-25 14:28:16.658459264 +0200
++++ xcdroast-0.98alpha15/po/fi.po	2004-08-25 14:28:44.024373547 +0200
+@@ -3763,7 +3763,7 @@
+ msgstr "Lis‰‰ laite jota automaattitunnistus ei lˆyt‰nyt."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Ole hyv‰ ja katso http://www.xcdroast.org/faq jos asemasi ei n‰y listalla."
+ 
+--- xcdroast-0.98alpha15/po/fr.po.spell	2004-08-25 14:28:16.662458229 +0200
++++ xcdroast-0.98alpha15/po/fr.po	2004-08-25 14:28:44.039369664 +0200
+@@ -3833,7 +3833,7 @@
+ "Ajoute un pÈriphÈrique qui n'a pas ÈtÈ reconnu par la recherche automatique."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Voir http://www.xcdroast.org/faq lorsque vous remarquez qu'un lecteur manque "
+ "dans cette liste."
+--- xcdroast-0.98alpha15/po/gl.po.spell	2004-08-25 14:28:16.665457452 +0200
++++ xcdroast-0.98alpha15/po/gl.po	2004-08-25 14:28:44.053366040 +0200
+@@ -3556,7 +3556,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/hr.po.spell	2004-08-25 14:28:16.667456935 +0200
++++ xcdroast-0.98alpha15/po/hr.po	2004-08-25 14:28:44.061363969 +0200
+@@ -3378,7 +3378,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/hu.po.spell	2004-08-25 14:28:16.670456158 +0200
++++ xcdroast-0.98alpha15/po/hu.po	2004-08-25 14:28:44.080359051 +0200
+@@ -3739,7 +3739,7 @@
+ "Olyan eszkˆz hozz·ad·sa, amelyet az automatikus felismerÈs nem tal·lt meg."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "NÈzd meg a http://www.xcdroast.org/faq cÌmet, ha hi·nyolsz egy eszkˆzt."
+ 
+--- xcdroast-0.98alpha15/po/id.po.spell	2004-08-25 14:28:16.673455381 +0200
++++ xcdroast-0.98alpha15/po/id.po	2004-08-25 14:28:44.095355168 +0200
+@@ -3502,7 +3502,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/it.po.spell	2004-08-25 14:28:16.676454605 +0200
++++ xcdroast-0.98alpha15/po/it.po	2004-08-25 14:28:44.105352579 +0200
+@@ -3822,7 +3822,7 @@
+ "automatica."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Controlla http://www.xcdroast.org/faq quando un dispositivo scompare da "
+ "questa lista"
+--- xcdroast-0.98alpha15/po/ja.po.spell	2004-08-25 14:28:16.679453828 +0200
++++ xcdroast-0.98alpha15/po/ja.po	2004-08-25 14:28:44.121348438 +0200
+@@ -3705,7 +3705,7 @@
+ msgstr "º´∆∞∏°Ω–§««ßº±§«§≠§ §´§√§ø•…•È•§•÷§Úƒ…≤√§π§Î°£"
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "§≥§Œ•Í•π•»§ÀÃµ§§•…•È•§•÷§À§ƒ§§§∆§œ http://www.xcdroast.org/faq §Úª≤æ»§∑§∆§Ø§¿"
+ "§µ§§°£"
+--- xcdroast-0.98alpha15/po/lv.po.spell	2004-08-25 14:28:16.683452793 +0200
++++ xcdroast-0.98alpha15/po/lv.po	2004-08-25 14:28:44.133345331 +0200
+@@ -3571,7 +3571,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/nl.po.spell	2004-08-25 14:28:16.686452016 +0200
++++ xcdroast-0.98alpha15/po/nl.po	2004-08-25 14:28:44.151340672 +0200
+@@ -3820,7 +3820,7 @@
+ "Voeg een apparaat toe dat niet herkend werd tijdens het automatische zoeken."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Ga naar http://www.xcdroast.org/faq wanneer u een apparaat mist op deze "
+ "lijst."
+--- xcdroast-0.98alpha15/po/no.po.spell	2004-08-25 14:28:16.689451240 +0200
++++ xcdroast-0.98alpha15/po/no.po	2004-08-25 14:28:44.176334200 +0200
+@@ -3711,7 +3711,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr "Se http://www.xcdroast.org/faq hvis du savner et drev i listen."
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/pl.po.spell	2004-08-25 14:28:16.691450722 +0200
++++ xcdroast-0.98alpha15/po/pl.po	2004-08-25 14:28:44.194329541 +0200
+@@ -3775,7 +3775,7 @@
+ "automatycznym."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr "Odwiedº http://www.xcdroast.org, je∂li brakuje napÍdu na li∂cie."
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/pt_BR.po.spell	2004-08-25 14:28:16.695449687 +0200
++++ xcdroast-0.98alpha15/po/pt_BR.po	2004-08-25 14:28:44.210325399 +0200
+@@ -3786,7 +3786,7 @@
+ msgstr "Adicionar um dispositivo n„o reconhecido pela busca autom·tica."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Favor ver http://www.xcdroast.org/faq quando perder um drive desta lista."
+ 
+--- xcdroast-0.98alpha15/po/ro.po.spell	2004-08-25 14:28:16.699448651 +0200
++++ xcdroast-0.98alpha15/po/ro.po	2004-08-25 14:28:44.223322034 +0200
+@@ -3734,7 +3734,7 @@
+ msgstr "Adauga un dispozitiv care nu a fost recunoscut de cautarea automata."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr "Vezi http://www.xcdroast.org/faq cind lipseste o unitate de pe lista."
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/ru.po.spell	2004-08-25 14:28:16.702447875 +0200
++++ xcdroast-0.98alpha15/po/ru.po	2004-08-25 14:28:44.245316339 +0200
+@@ -3805,7 +3805,7 @@
+ msgstr "‰œ¬¡◊…‘ÿ ’”‘“œ ”‘◊œ, Àœ‘œ“œ≈ Œ≈ ¬ŸÃœ ¡◊‘œÕ¡‘…ﬁ≈”À… œ–“≈ƒ≈Ã≈Œœ."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "“œﬁ…‘¡ ‘≈ http://www.xcdroast.org/faq, ≈”Ã… ◊Ÿ Œ≈ Õœ÷≈‘≈ Œ¡ ‘… ◊¡€ –“…◊œƒ ◊ "
+ "‹‘œÕ ”–…”À≈."
+--- xcdroast-0.98alpha15/po/sk.po.spell	2004-08-25 14:28:16.706446839 +0200
++++ xcdroast-0.98alpha15/po/sk.po	2004-08-25 14:28:44.259312715 +0200
+@@ -3519,7 +3519,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/sq_AL.po.spell	2004-08-25 14:28:16.709446063 +0200
++++ xcdroast-0.98alpha15/po/sq_AL.po	2004-08-25 14:28:44.276308315 +0200
+@@ -3797,7 +3797,7 @@
+ msgstr "Shto njÎ paisje qÎ nuk ÎshtÎ njohur prej kontrollit automatik."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "Ju lutemi shihni http://www.xcdroast.org/faq nÎse ju mungon njÎ model i "
+ "listuar kÎtu."
+--- xcdroast-0.98alpha15/po/sv.po.spell	2004-08-25 14:28:16.712445286 +0200
++++ xcdroast-0.98alpha15/po/sv.po	2004-08-25 14:28:44.290304691 +0200
+@@ -3750,7 +3750,7 @@
+ msgstr "L‰gg till en enhet som inte hittades av den automatiska sˆkningen."
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr "Se http://www.xcdroast.org/faq om din enhet saknas frÂn listan."
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/tr.po.spell	2004-08-25 14:28:16.714444768 +0200
++++ xcdroast-0.98alpha15/po/tr.po	2004-08-25 14:28:44.306300549 +0200
+@@ -3477,7 +3477,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/uk.po.spell	2004-08-25 14:28:16.717443992 +0200
++++ xcdroast-0.98alpha15/po/uk.po	2004-08-25 14:28:44.325295630 +0200
+@@ -3698,7 +3698,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ "–Ø–∫—â–æ –≤–∏ –Ω–µ –∑–Ω–∞–π—à–ª–∏ –ø—Ä–∏—Å—Ç—Ä—ñ–π —É —Å–ø–∏—Å–∫—É, –ø–µ—Ä–µ–≥–ª—è–Ω—å—Ç–µ http://www.xcdroast.org/faq"
+ 
+--- xcdroast-0.98alpha15/po/zh_CN.GB2312.po.spell	2004-08-25 14:28:16.720443215 +0200
++++ xcdroast-0.98alpha15/po/zh_CN.GB2312.po	2004-08-25 14:28:44.340291748 +0200
+@@ -3333,7 +3333,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/zh_TW.Big5.po.spell	2004-08-25 14:28:16.724442180 +0200
++++ xcdroast-0.98alpha15/po/zh_TW.Big5.po	2004-08-25 14:28:44.349289418 +0200
+@@ -3332,7 +3332,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/po/xcdroast.pot.spell	2004-08-25 14:28:23.210762710 +0200
++++ xcdroast-0.98alpha15/po/xcdroast.pot	2004-08-25 14:28:44.356287606 +0200
+@@ -3223,7 +3223,7 @@
+ msgstr ""
+ 
+ #: src/setup.c:761
+-msgid "Please see http://www.xcdroast.org/faq when you miss a drive this list."
++msgid "Please see http://www.xcdroast.org/faq when you miss a drive from this list."
+ msgstr ""
+ 
+ #: src/setup.c:921
+--- xcdroast-0.98alpha15/src/setup.c.spell	2004-08-25 14:27:35.115215846 +0200
++++ xcdroast-0.98alpha15/src/setup.c	2004-08-25 14:27:46.469275997 +0200
+@@ -736,7 +736,7 @@
+ 		gtk_widget_set_sensitive(b2, FALSE);
+ 	}
+ 
+-	l1 = gtk_label_new(_("Please see http://www.xcdroast.org/faq when you miss a drive this list."));
++	l1 = gtk_label_new(_("Please see http://www.xcdroast.org/faq when you miss a drive from this list."));
+ 	gtk_box_pack_start(GTK_BOX(vbox),l1, FALSE, TRUE, 0);
+ 	gtk_widget_show(l1);
+ }

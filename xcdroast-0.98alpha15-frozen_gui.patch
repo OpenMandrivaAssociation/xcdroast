@@ -1,0 +1,84 @@
+diff -ur xcdroast-0.98alpha15/src/main.h xcdroast-0.98alpha15.new/src/main.h
+--- xcdroast-0.98alpha15/src/main.h	2003-10-30 13:49:04.000000000 +0100
++++ xcdroast-0.98alpha15.new/src/main.h	2004-12-15 10:21:34.000000000 +0100
+@@ -137,6 +137,7 @@
+ gint determine_cd_type(gchar *ret, gint mode);
+ gint determine_free_space(gint *biggestfree);
+ gint read_line(gint fd, gchar *ptr, gint maxlen);
++gint read_line_wait(gint fd, gchar *ptr, gint maxlen);
+ gint allocate_track_filenames(gint *overwrite, gint *overwritebiggest);
+ gint scan_for_toc_files();
+ void print_trackreadset();
+diff -ur xcdroast-0.98alpha15/src/tools.c xcdroast-0.98alpha15.new/src/tools.c
+--- xcdroast-0.98alpha15/src/tools.c	2004-12-15 10:28:52.612444656 +0100
++++ xcdroast-0.98alpha15.new/src/tools.c	2004-12-15 10:24:35.000000000 +0100
+@@ -596,6 +596,69 @@
+ 			if (rc == -1 && errno == EAGAIN) {
+ 				if (n == 1) 
+ 					return(-1);
++				else
++					break;
++			}	
++                        return(-1);     /* error */
++		}
++        }
++
++	/* terminate the string */
++	*ptr = 0;
++ 
++        /* strip of some trailing chars - yes..we need both levels */
++        ptr--;
++        if ((*ptr == '\n') || (*ptr == '\r') ) {
++                *ptr = 0;
++        }
++        ptr--;
++        if ((*ptr == '\n') || (*ptr == '\r') ) {
++                *ptr = 0;
++        }
++ 
++	if (strlen(str) == 0) {
++		/* if we read an empty string, but are NOT on EOF return 1 */
++		return 1;
++	} else {
++        	return(strlen(str));
++	}
++}
++
++
++/*
++ * Use this version to work around some of the critical races
++ * such as bz 127658. This issue should be solved on a case by case basis.
++ * Expected side effects: GUI freezes (e.g. if called from read_write_out() in io.c).
++ */
++
++gint read_line_wait(gint fd, gchar *ptr, gint maxlen) {
++gint n, rc;
++gchar c;
++gchar *str;
++
++	str = ptr;
++ 
++        for (n = 1; n < maxlen; n++) {
++                if ( (rc = read(fd, &c, 1)) == 1) {
++                        *ptr++ = c;
++                        if (c == '\n') {
++                                break;
++                        }
++
++                } else if (rc == 0) {
++			/* EOF */
++                        if (n == 1)
++                                return(0);      /* EOF, no data read */
++                        else
++                                break;          /* EOF, some data was read */
++                } else if (rc == -2) {
++			/* timeout while reading string */
++			return(-2);
++		} else {
++			/* nonblocking mode an nothing to read? */
++			if (rc == -1 && errno == EAGAIN) {
++				if (n == 1) 
++					return(-1);
+ 				else {
+ 					/* Partial line read.  Wait a
+ 					 * bit longer in case there's

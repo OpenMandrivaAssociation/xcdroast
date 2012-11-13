@@ -1,0 +1,113 @@
+--- xcdroast-0.98alpha15/src/io.c.cdrkit	2007-08-13 16:52:35.000000000 +0200
++++ xcdroast-0.98alpha15/src/io.c	2007-08-13 16:53:28.000000000 +0200
+@@ -4736,7 +4736,7 @@
+ 	dolog(3, "Saving extended output to %s\n", fname);
+ 
+ 	/* write to file */
+-	fd = open(fname,O_WRONLY | O_CREAT);
++	fd = open(fname,O_WRONLY | O_CREAT, 0600);
+ 	if (fd < 0) {
+ 		g_warning("Can't open file %s for writing\n",fname);
+ 		return 1;
+@@ -10041,6 +10041,7 @@
+ 
+ gint check_version_mkisofs(gchar *match, gchar *found) {
+ gchar line[MAXLINE];
++gchar vline[MAXLINE];
+ gchar ver[MAXLINE];
+ FILE *fpin;
+ gchar *p;
+@@ -10055,17 +10056,22 @@
+         }
+ 
+ 	strcpy(line,"");
++	strcpy(vline,"");
+         for (;;) {
+                 if (fgets(line,MAXLINE,fpin) == NULL) 
+                         break;
+ 		dodebug(10,"got: %s",line);
++		/* only get first line */
++		if (strcmp(vline,"") == 0) {
++			strncpy(vline, line, MAXLINE);
++		}
+         }
+ 
+         if (pclose(fpin) == -1) {
+                 g_error("pclose error\n");
+         }
+ 
+-	if (strcmp(line,"") == 0 || strstr(line,"sh:") != NULL) {
++	if (strcmp(vline,"") == 0 || strstr(vline,"sh:") != NULL) {
+ 		/* failed to open - permission denied */
+ 		return 2;
+ 	}
+@@ -10107,7 +10113,7 @@
+ gchar ver[MAXLINE];
+ FILE *fpin;
+ gchar *p;
+-
++ int icedax=0;
+ 	strcpy(ver,"");
+ 	get_wrap_path("CDDA2WAV",line);
+ 	strcat(line," -h 2>&1");
+@@ -10126,6 +10132,9 @@
+                 if (fgets(line,MAXLINE,fpin) == NULL) 
+                         break;
+ 		dodebug(11,"got: %s",line);
++		if (strstr(line, "icedax") != NULL) {
++		  icedax=1;
++		}	 
+ 		if (strncmp(line, "Version", 7) == 0) {
+ 			strcpy(line2, line);
+ 			dodebug(10,"got version: %s",line);
+@@ -10141,6 +10150,10 @@
+ 		return 2;
+ 	}
+ 
++	if (icedax) {
++	  strcpy(found, CDDA2WAV_VERSION);
++	  return 0;
++	}	 
+ 
+ 	/* now line2 contains the version string of cdda2wav */
+ 	/* try to extract the version number */
+@@ -10176,13 +10189,14 @@
+ 
+ gint check_version_readcd(gchar *match, gchar *found) {
+ gchar line[MAXLINE];
++gchar vline[MAXLINE];
+ gchar ver[MAXLINE];
+ FILE *fpin;
+ gchar *p;
+ 
+ 	strcpy(ver,"");
+ 	get_wrap_path("READCD",line);
+-	strcat(line," -version 2>/dev/null | head -n 1");
++	strcat(line," -version 2>/dev/null | fgrep " READCD_NAME);
+ 
+ 	dodebug(1, "calling: %s\n", line);
+         if ((fpin = popen(line,"r")) == NULL) {
+@@ -10190,17 +10204,22 @@
+         }
+ 
+ 	strcpy(line,"");
++	strcpy(vline,"");
+         for (;;) {
+                 if (fgets(line,MAXLINE,fpin) == NULL) 
+                         break;
+ 		dodebug(10,"got: %s",line);
++		/* only get first line */
++		if (strcmp(vline,"") == 0) {
++			strncpy(vline, line, MAXLINE);
++		}
+         }
+ 
+         if (pclose(fpin) == -1) {
+                 g_error("pclose error\n");
+         }
+ 
+-	if (strcmp(line,"") == 0 || strstr(line,"sh:") != NULL) {
++	if (strcmp(vline,"") == 0 || strstr(vline,"sh:") != NULL) {
+ 		/* failed to open - permission denied */
+ 		return 2;
+ 	}
