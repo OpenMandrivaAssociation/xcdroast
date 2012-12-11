@@ -141,3 +141,193 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/32x32/apps/%{name}.png
 %{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
+
+
+%changelog
+* Wed Dec 08 2010 Oden Eriksson <oeriksson@mandriva.com> 11:0.98-0.a15.40mdv2011.0
++ Revision: 615495
+- the mass rebuild of 2010.1 packages
+
+* Sat Feb 20 2010 Funda Wang <fwang@mandriva.org> 11:0.98-0.a15.39mdv2010.1
++ Revision: 508724
+- fix str fmt
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - lowercase ImageMagick
+
+* Thu Jun 12 2008 Pixel <pixel@mandriva.com> 11:0.98-0.a15.38mdv2009.0
++ Revision: 218426
+- rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Fri Aug 31 2007 Adam Williamson <awilliamson@mandriva.org> 11:0.98-0.a15.38mdv2008.0
++ Revision: 76389
+- rebuild for 2008
+- correct license, use Fedora license policy
+- clean file list
+- correct xdg categories
+- run via soundwrapper as it plays audio
+- better description in menu entry
+- better name in menu entry
+- fd.o icons
+- put stuff in /usr/lib/xcdroast not %%_libdir/xcdroast as it's not at all arch-dependent
+- use Fedora description, slightly modified
+- update requires for cdrkit
+- sync patches with Fedora (preserving our old patch2 and patch3 as patch40 and patch41; our old patch and patch1 are superseded). brings cdrkit support
+- fix the stupidly broken and non-policy-conformant versioning: bump epoch
+- Import xcdroast
+
+
+
+* Tue Sep 05 2006 Stéphane Téletchéa <steletch@mandriva.org> 0.98-38.alpha15mdv2007.0
+- Migration to XDG menus
+- add mkrel macro
+
+* Sun Jan 01 2006 Mandriva Linux Team <http://www.mandrivaexpert.com/> 0.98-36.alpha16mdk
+- Rebuild
+
+* Fri Jul 15 2005 Per Ã˜yvind Karlsen <pkarlsen@mandriva.com> 0.98-36.alpha15mdk
+- %%mkrel
+- cosmetics
+- from Michael Collard <quadfour@iinet.net.au> :
+	o patch for non root writing on recent kernels (suid but not used)
+
+* Mon Sep 06 2004 Marcel Pol <mpol@mandrake.org> 9:0.98-35.alpha15mdk
+- fix menu section
+
+* Wed Aug 25 2004 Warly <warly@mandrakesoft.com> 9:0.98-34.alpha15mdk
+- fix a missing word (from list -> from this list)
+
+* Wed Apr 14 2004 Gwenole Beauchesne <gbeauchesne@mandrakesoft.com> 0.98-33.alpha15mdk
+- 64-bit fixes
+
+* Mon Mar  1 2004 Warly <warly@mandrakesoft.com> 9:0.98-32.alpha15mdk
+- Update DVD patch to allow ide burning
+
+* Fri Jan 23 2004 Austin Acton <austin@mandrake.org> 0.98-31.alpha15mdk
+- 0.98alpha15
+- enable gtk2 build
+- rediff the dvd patch
+- add icon
+- add some buildrequires
+
+* Thu Oct  9 2003 Gwenole Beauchesne <gbeauchesne@mandrakesoft.com> 0.98-30.alpha14mdk
+- fix build
+
+* Mon Aug 11 2003 Warly <warly@mandrakesoft.com> 9:0.98-29.alpha14mdk
+- fix segfault on startup with new cdrecord message
+
+* Mon Jun 16 2003 Warly <warly@mandrakesoft.com> 9:0.98-28.alpha14mdk
+- new version
+- Activate DVD burning
+
+* Thu Feb 20 2003 Warly <warly@mandrakesoft.com> 9:0.98-27.alpha13mdk
+- new version
+- rollback new child processing code completely 
+- fixes the multisession problems introduced in alpha12.
+
+* Fri Dec 27 2002 Warly <warly@mandrakesoft.com> 9:0.98-26mdk
+- new version alpha12
+
+* Fri Dec  6 2002 Warly <warly@mandrakesoft.com> 9:0.98-25mdk
+- new version
+
+* Mon Dec  2 2002 Gwenole Beauchesne <gbeauchesne@mandrakesoft.com> 0.98-24mdk
+- Make it lib64 aware
+
+* Wed Sep  4 2002 Warly <warly@mandrakesoft.com> 9:0.98-23mdk
+- change xcdwrite group to cdwriter group
+
+* Mon Jul 29 2002 Stefan van der Eijk <stefan@eijk.nu> 0.98-22mdk
+- BuildRequires
+
+* Fri Apr 26 2002 Daouda LO <daouda@mandrakesoft.com> 0.98-21mdk
+- big cleanup from Thomas Niederreiter 
+		o add missing files
+		o remove obsolete actions
+		o spec cleanups
+		o remove patches
+
+* Thu Apr 25 2002 Daouda LO <daouda@mandrakesoft.com> 0.98-20mdk
+- 0.98alpha10
+	o redesign dialogs on startup
+	o allow to select multiple master-paths/excludes at the same time
+	o man page
+    o pushed max write speed to 64x ...
+
+* Thu Apr 18 2002 Daouda LO <daouda@mandrakesoft.com> 0.98-19mdk
+- mkisofs-1.15a21
+
+* Fri Apr 12 2002 Daouda LO <daouda@mandrakesoft.com> 0.98-18mdk
+- no version check in menu : Denis Pelletier <denis.pelletier@umontreal.ca>
+
+* Fri Apr 12 2002 Daouda LO <daouda@mandrakesoft.com> 0.98-17mdk
+- cdrecord-1.11a19, mkisofs-1.11a20
+- no root-mode for cd audio access (cdda2wav > a19)
+
+* Wed Feb 27 2002 Daouda LO <daouda@mandrakesoft.com> 0.98-16mdk
+- for cdrecord-1.11-0.a15
+
+* Sun Feb 17 2002 Daouda LO <daouda@mandrakesoft.com> 0.98-15mdk
+- update to cdrecord-1.11-0.a14.
+
+* Fri Jan 25 2002 Daouda LO <daouda@mandrakesoft.com> 0.98-14mdk
+- dirty fix for cdrecord-1.11-0.a13. 
+
+* Wed Jan 09 2002 David BAUDENS <baudens@mandrakesoft.com> 0.98-13mdk
+- Fix menu entry using png icon
+
+* Wed Oct 10 2001 Till Kamppeter <till@mandrakesoft.com> 0.98-12mdk
+- Rebuilt for libpng3.
+
+* Tue Sep 11 2001 David BAUDENS <baudens@mandrakesoft.com> 0.98-11mdk
+- Use new icons
+- Use right macros for update/clean_menus
+
+* Tue Sep 11 2001 Stefan van der Eijk <stefan@eijk.nu> 0.98-10mdk
+- BuildRequires: gtk+-devel imlib-devel
+- Copyright --> License
+
+* Tue Aug  7 2001 Till Kamppeter <till@mandrakesoft.com> 0.98-9mdk
+- Updated to version 0.98alpha9.
+
+* Fri Jun  7 2001 Till Kamppeter <till@mandrakesoft.com> 0.98-8mdk
+- Downdated to version 0.98alpha6 (non-root-mode introduced in 0.98alpha7
+  does not work with GTK 1.2.9, 0.98alpha6 can simply be started as normal
+  user when backends have correct permissions)
+- Enabled usage by non-root users via non-root mode of X-CD-Roast
+- Enabled usage with cdrecord > 1.9
+
+* Fri Mar 30 2001 Till Kamppeter <till@mandrakesoft.com> 0.98-7mdk
+- Replaced translation update file by the current one
+
+* Tue Feb  6 2001 Daouda Lo <daouda@mandrakesoft.com> 0.98-6mdk
+- release alpha 8
+- regenerate patch
+
+* Mon Jan 29 2001  Daouda Lo <daouda@mandrakesoft.com> 0.98-5mdk
+- really fix xcdroast requiring cdrtools 1.9 .
+
+* Fri Jan 26 2001  Daouda Lo <daouda@mandrakesoft.com> 0.98-4mdk
+- fix  requires (thanx Ed) 
+
+* Fri Jan 26 2001  Daouda Lo <daouda@mandrakesoft.com> 0.98-3mdk
+- fix dependencies with cdrecord (thanx Quel Qun)
+- fix standard dir owned by packages 
+
+* Thu Oct 05 2000 Yoann Vandoorselaere <yoann@mandrakesoft.com> 0.98-2mdk
+- All icons size.
+- Icons now work.
+
+* Sun Sep  3 2000 Till Kamppeter <till@mandrakesoft.com> 0.98-1mdk
+- Old ChangeLog removed becasue structure of specfile is completely new
+- Complete replacement by the new GTK-based X-CD-Roast 0.98
+- initial release
