@@ -44,7 +44,7 @@ Requires: 	cdrkit
 Requires:	cdrkit-genisoimage
 Requires:	cdrkit-icedax
 BuildRequires:	gtk2-devel 
-BuildRequires:	libgdk_pixbuf2.0-devel 
+BuildRequires:	pkgconfig(gdk-pixbuf-2.0) 
 BuildRequires:	pcre-devel 
 BuildRequires:	imagemagick
 BuildRequires:	bison
