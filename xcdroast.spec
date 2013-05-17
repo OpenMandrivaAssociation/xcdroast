@@ -1,12 +1,10 @@
 %define	alpharel	alpha15
 %define	alpha		15
-%define	rel		40
-%define release		%mkrel 0.a%{alpha}.%{rel}
 
 Summary:	A GUI program for burning CDs
 Name:		xcdroast
 Version:	0.98
-Release:	%{release}
+Release:	0.a%{alpha}.41
 Epoch:		11
 URL:		http://www.xcdroast.org/
 Source:		http://xcdroast.sourceforge.net/RPMS/%{alpha}/src/%{name}-%{version}%{alpharel}.tar.bz2
@@ -39,7 +37,6 @@ Patch40:	xcdroast-0.98alpha15.spell.patch
 Patch41:	xcdroast-linux-new_kernel.patch
 License:	LGPLv2+
 Group:		Archiving/Cd burning
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: 	cdrkit
 Requires:	cdrkit-genisoimage
 Requires:	cdrkit-icedax
@@ -92,17 +89,16 @@ autoreconf -fi
 %make PREFIX=%{_prefix}
 
 %install
-rm -fr %{buildroot}
 %makeinstall_std PREFIX=%{_prefix}
 
 # icons
 mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
-convert -size 48x48 xpms/xcdricon.xpm $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-convert -size 32x32 xpms/xcdricon.xpm $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-convert -size 16x16 xpms/xcdricon.xpm $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+convert -size 48x48 xpms/xcdricon.xpm %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+convert -size 32x32 xpms/xcdricon.xpm %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert -size 16x16 xpms/xcdricon.xpm %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=X-CD-Roast
 Comment=CD / DVD writing application
@@ -115,23 +111,9 @@ EOF
 
 %find_lang %{name}
 
-%if %mdkversion < 200900
-%post 
-%update_menus
-%{update_icon_cache hicolor}
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%{clean_icon_cache hicolor}
-%endif
-
 %clean
-rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc ChangeLog doc README 
 %{_bindir}/xcdroast
 %{_prefix}/lib/xcdroast-0.98
