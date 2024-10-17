@@ -6,7 +6,7 @@ Name:		xcdroast
 Version:	0.98
 Release:	0.a%{alpha}.41
 Epoch:		11
-URL:		http://www.xcdroast.org/
+URL:		https://www.xcdroast.org/
 Source:		http://xcdroast.sourceforge.net/RPMS/%{alpha}/src/%{name}-%{version}%{alpharel}.tar.bz2
 Patch1:		xcdroast-0.98alpha15-linebuffer.patch
 Patch2:		xcdroast-0.98alpha15-nowarn.patch
