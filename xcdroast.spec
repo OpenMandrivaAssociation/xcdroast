@@ -40,6 +40,11 @@ Group:		Archiving/Cd burning
 Requires: 	cdrkit
 Requires:	cdrkit-genisoimage
 Requires:	cdrkit-icedax
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	gtk2-devel 
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0) 
 BuildRequires:	pcre-devel 
